@@ -1,0 +1,37 @@
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+eval $($(which brew) shellenv)
+NVM_HOMEBREW=$(brew --prefix nvm)
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
+
+# load local zsh env file (which shouldn't exist in versioning)
+[ -e $HOME/.zshenv.local ] && source $HOME/.zshenv.local
+
+eval "$(sheldon source)"
+eval "$(starship init zsh)"
+
+[ -e ~/.aliases ] && source ~/.aliases
+[ -e ~/.aliases.local ] && source ~/.aliases.local
+
+# load local zsh file (which shouldn't exist in versioning)
+[ -e ~/.zshrc.local ] && source ~/.zshrc.local
+
+# bun completions
+[ -s "/Users/robert/.bun/_bun" ] && source "/Users/robert/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export TERMINUS_ALLOW_UNSUPPORTED_NEWER_PHP="true"
+
+# pnpm
+export PNPM_HOME="/Users/robert/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

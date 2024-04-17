@@ -1,0 +1,16 @@
+[submodule "iterm/colors/iTerm2-Color-Schemes"]
+	path = iterm/colors/iTerm2-Color-Schemes
+	url = git@github.com:mbadolato/iTerm2-Color-Schemes.git
+[submodule "iterm/colors/iterm-mphc"]
+	path = iterm/colors/iterm-mphc
+	url = git@github.com:everdrone/iterm-mphc.git
+[submodule "iterm/icons/iterm2-icons"]
+	path = iterm/icons/iterm2-icons
+	url = git@github.com:jasonlong/iterm2-icons.git
+[submodule "iterm/icons/terminal-icons"]
+	path = iterm/icons/terminal-icons
+	url = git@github.com:dhanishgajjar/terminal-icons.git
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty

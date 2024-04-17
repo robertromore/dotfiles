@@ -1,0 +1,71 @@
+# `sheldon` configuration file
+# ----------------------------
+#
+# You can modify this file directly or you can use one of the following
+# `sheldon` commands which are provided to assist in editing the config file:
+#
+# - `sheldon add` to add a new plugin to the config file
+# - `sheldon edit` to open up the config file in the default editor
+# - `sheldon remove` to remove a plugin from the config file
+#
+# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
+
+shell = "zsh"
+apply = ["defer"]
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+apply = ["source"]
+
+[templates]
+defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
+
+[plugins.compinit]
+inline = "autoload -Uz compinit && zsh-defer compinit && compinit"
+
+[plugins.ohmyzsh-lib]
+github = "ohmyzsh/ohmyzsh"
+dir = "lib"
+use = ["{clipboard,completion,correction,directories,functions,git,grep,history,key-bindings,misc,spectrum,termsupport,theme-and-appearance}.zsh"]
+
+[plugins.ohmyzsh-plugins]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins"
+use = ["{bgnotify/bgnotify,composer/composer,git/git,gitfast/gitfast,history/history,macos/macos,z/z}.plugin.zsh"]
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+apply = ["defer"]
+
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+
+[plugins.zsh-256color]
+github = "chrissicool/zsh-256color"
+
+[plugins.alias-tips]
+github = "djui/alias-tips"
+
+[plugins.base16-shell]
+github = "chriskempson/base16-shell"
+
+[plugins.zsh-interactive-cd]
+github = "changyuheng/zsh-interactive-cd"
+
+[plugins.git-extra-commands]
+github = "unixorn/git-extra-commands"
+
+[plugins.mcfly]
+github = "cantino/mcfly"
+apply = ["defer"]
+
+[plugins.dotfiles]
+local = "~/.ws/dotfiles/zsh"
+use = ["{aliases/common,aliases/file,aliases/git,aliases/ls,aliases/lsd,aliases/misc,aliases/network,aliases/rsync,aliases/search,aliases/ssh,aliases/utility,functions/misc}.zsh"]
+
+[plugins.nvm]
+github = "lukechilds/zsh-nvm"
+apply = ["defer"]

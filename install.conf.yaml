@@ -1,0 +1,24 @@
+- clean: ["~"]
+
+- link:
+    ~/.bash_profile: bash/bash_profile
+    ~/.bash_prompt: bash/bash_prompt
+    ~/.bashrc: bash/bashrc
+    ~/.config/starship.toml: starship/starship.toml
+    ~/.curlrc: curl/curlrc
+    ~/.dotfiles: ""
+    ~/.editorconfig: editorconfig
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore: git/gitignore
+    ~/.hushlogin: hushlogin
+    ~/.inputrc: bash/inputrc
+    ~/.mackup.cfg: mackup/mackup.cfg
+    ~/.screenrc: screenrc
+    ~/.config/sheldon/plugins.toml: sheldon/plugins.toml
+    ~/.wgetrc: wget/wgetrc
+    ~/.zlogin: zsh/zlogin
+    ~/.zshenv: zsh/zshenv
+    ~/.zshrc: zsh/zshrc
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

@@ -1,0 +1,72 @@
+# Nicer prompt.
+export PS1="\[\e[0;32m\] \[\e[1;32m\]\t \[\e[0;2m\]\w \[\e[0m\]\$ "
+
+# Use colors.
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# Custom $PATH with extra locations.
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:/usr/local/git/bin:$HOME/.composer/vendor/bin:$PATH
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend;
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
+
+# Enable some Bash 4 features when possible:
+# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
+# * Recursive globbing, e.g. `echo **/*.txt`
+for option in autocd globstar; do
+	shopt -s "$option" 2> /dev/null;
+done;
+
+# Include alias file (if present) containing aliases for ssh, etc.
+if [ -f ~/.bash_aliases ]
+then
+  source ~/.bash_aliases
+fi
+
+# Include bashrc file (if present).
+if [ -f ~/.bashrc ]
+then
+  source ~/.bashrc
+fi
+
+# Syntax-highlight code for copying and pasting.
+# Requires highlight (`brew install highlight`).
+function pretty() {
+  pbpaste | highlight --syntax=$1 -O rtf | pbcopy
+}
+
+# Add tab completion for Bash commands
+if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
+	# Ensure existing Homebrew v1 completions continue to work
+	export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d";
+	source "$(brew --prefix)/etc/profile.d/bash_completion.sh";
+elif [ -f /etc/bash_completion ]; then
+	source /etc/bash_completion;
+fi
+
+# Use nvm.
+export NVM_DIR="$HOME/.nvm"
+. "$brew_prefix/opt/nvm/nvm.sh"
+
+# Delete a given line number in the known_hosts file.
+knownrm() {
+  re='^[0-9]+$'
+  if ! [[ $1 =~ $re ]] ; then
+    echo "error: line number missing" >&2;
+  else
+    sed -i '' "$1d" ~/.ssh/known_hosts
+  fi
+}
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+. "$HOME/.cargo/env"
